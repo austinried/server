@@ -11,4 +11,3 @@ __pycache__
 .*.swp
 
 docker/data
-docker/config

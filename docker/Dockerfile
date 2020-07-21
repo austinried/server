@@ -5,11 +5,14 @@ SHELL [ "/bin/bash", "-c" ]
 RUN apt-get update && \
     apt-get install -y python3-virtualenv python3-pip
 
-RUN ln -s /usr/bin/python3 /usr/bin/python && \
-    ln -s /usr/bin/pip3 /usr/bin/pip
-
 COPY . /server
 COPY docker/_etesync-server_init.ini /server/etesync-server.ini
+
+RUN groupadd -r etesyncer && \
+    useradd -r -m -g etesyncer etesyncer && \
+    chown -R etesyncer /server
+
+USER etesyncer
 
 RUN cd /server && \
     virtualenv -p python3 venv && \
@@ -18,5 +21,7 @@ RUN cd /server && \
 
 RUN /server/docker/_init.sh
 
+USER root
 WORKDIR /server
+ENTRYPOINT [ "docker/_entrypoint.sh" ]
 CMD [ "docker/_start-server.sh" ]
