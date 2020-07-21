@@ -1,0 +1,6 @@
+docker/config
+docker/data
+docker/build.sh
+docker/run.sh
+etesync-server.ini.example
+example-configs/

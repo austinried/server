@@ -9,3 +9,6 @@ Session.vim
 
 __pycache__
 .*.swp
+
+docker/data
+docker/config
