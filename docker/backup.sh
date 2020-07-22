@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
 
-CONTAINER=$1
-BACKUP_DIR=$2
-RESTORE=$3
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $DIR/config/settings.sh
+
+RESTORE=$1
 
 function backup_file {
     local FILENAME=$1
@@ -17,6 +18,7 @@ function backup_file {
     fi
 }
 
-backup_file etesync-server.ini
-backup_file db.sqlite3
-backup_file secret.txt
+for FILE in ${BACKUP_FILES[*]}
+do
+    backup_file $FILE
+done

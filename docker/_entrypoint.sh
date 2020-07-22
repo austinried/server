@@ -1,7 +1,10 @@
 #!/bin/bash
 
-chown etesyncer /server/etesync-server.ini
-chown etesyncer /server/db.sqlite3
-chown etesyncer /server/secret.txt
+source /server/docker/config/settings.sh
 
-su -c "$@" etesyncer
+for FILE in ${BACKUP_FILES[*]}
+do
+    chown etesyncer /server/$FILE
+done
+
+exec su -c "$@" etesyncer
