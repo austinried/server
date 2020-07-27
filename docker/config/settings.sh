@@ -7,6 +7,6 @@ CONTAINER=etesync_server
 BACKUP_DIR=$CONFIG_DIR/../data
 BACKUP_FILES=(
     etesync-server.ini
-    db.sqlite3
     secret.txt
 )
+BACKUP_DB=db.sqlite3

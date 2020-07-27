@@ -22,3 +22,10 @@ for FILE in ${BACKUP_FILES[*]}
 do
     backup_file $FILE
 done
+
+if [ ! "$(docker ps | grep $CONTAINER)" ]; then
+    backup_file $BACKUP_DB
+else
+    docker exec -it $CONTAINER sqlite3 /server/$BACKUP_DB ".backup '/server/backup_db.sqlite3'"
+    docker cp $CONTAINER:/server/$BACKUP_DB $BACKUP_DIR/$BACKUP_DB
+fi
