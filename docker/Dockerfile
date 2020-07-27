@@ -1,9 +1,9 @@
-FROM ubuntu:focal
+FROM debian:buster
 
 SHELL [ "/bin/bash", "-c" ]
 
 RUN apt-get update && \
-    apt-get install -y python3-virtualenv python3-pip
+    apt-get install -y python-virtualenv python3-virtualenv python3-pip sqlite3
 
 COPY . /server
 COPY docker/_etesync-server_init.ini /server/etesync-server.ini
